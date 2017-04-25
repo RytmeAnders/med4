@@ -1,22 +1,30 @@
+#include <SoftwareSerial.h>
+#include <SerialCommand.h>
 #include "GY_85.h"
 #include <Wire.h>
 
-GY_85 GY85;     //create the object
+SerialCommand sCmd;
+GY_85 GY85; // Create object of GY_85
 
-void setup()
-{
+void setup() {
     Wire.begin();
     delay(10);
     Serial.begin(9600);
+    
     delay(10);
     GY85.init();
     delay(10);
+    while(!Serial);
+    sCmd.addCommand("PING", pingHandler);
+    sCmd.addCommand("ECHO", echoHandler);
 }
 
+void loop() {
+  if (Serial.available() > 0){
+      sCmd.readSerial();
+  }
 
-void loop()
-{
-    int ax = GY85.accelerometer_x( GY85.readFromAccelerometer() );
+  int ax = GY85.accelerometer_x( GY85.readFromAccelerometer() );
     int ay = GY85.accelerometer_y( GY85.readFromAccelerometer() );
     int az = GY85.accelerometer_z( GY85.readFromAccelerometer() );
     
@@ -55,5 +63,19 @@ void loop()
     Serial.print  ( " gyro temp:" );
     Serial.println( gt );
     
-    delay(500);             // only read every 0,5 seconds, 10ms for 100Hz, 20ms for 50Hz
+    delay(50);             // only read every 0,5 seconds, 10ms for 100Hz, 20ms for 50Hz
 }
+
+void pingHandler() {
+  Serial.println("PONG");
+}
+
+void echoHandler () {
+  char *arg;
+  arg = sCmd.next();
+  if (arg != NULL)
+    Serial.println(arg);
+  else
+    Serial.println("nothing to echo");
+}
+
