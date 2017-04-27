@@ -24,7 +24,7 @@ void loop() {
       sCmd.readSerial();
   }
 
-  int ax = GY85.accelerometer_x( GY85.readFromAccelerometer() );
+    int ax = GY85.accelerometer_x( GY85.readFromAccelerometer() );
     int ay = GY85.accelerometer_y( GY85.readFromAccelerometer() );
     int az = GY85.accelerometer_z( GY85.readFromAccelerometer() );
     
@@ -62,6 +62,9 @@ void loop() {
     Serial.print  ( gz );
     Serial.print  ( " gyro temp:" );
     Serial.println( gt );
+
+    Serial.write(ax);
+    //Serial.flush();
     
     delay(50);             // only read every 0,5 seconds, 10ms for 100Hz, 20ms for 50Hz
 }

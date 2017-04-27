@@ -5,13 +5,12 @@ using System.IO.Ports;
 
 public class ReadingArduino : MonoBehaviour {
 
-    SerialPort stream;
+    SerialPort stream = new SerialPort("COM7", 9600);
 
 	// Use this for initialization
 	void Start () {
-        stream = new SerialPort("COM8", 9600);
-        stream.ReadTimeout = 50;
         stream.Open();
+        stream.ReadTimeout = 50;
     }
 	
 	// Update is called once per frame
@@ -21,18 +20,16 @@ public class ReadingArduino : MonoBehaviour {
         {
             try
             {
-                stream.ReadLine();
+                //stream.ReadByte();
+                print(stream.ReadLine());
             }
-            catch
-            {
-
-            }
+            catch (System.Exception){}
         }
 	}
 
-    public void WriteToArduino(string message)
+    public void WriteToArduino()
     {
-        stream.WriteLine(message);
+        stream.Write("Yo");
         stream.BaseStream.Flush();
     }
 }

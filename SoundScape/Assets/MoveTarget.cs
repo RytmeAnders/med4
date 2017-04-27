@@ -3,6 +3,7 @@ using System.Collections;
 
 public class MoveTarget : MonoBehaviour {
 
+    ReadingArduino readingArduino;
 
     private int posCounter;
 
@@ -29,6 +30,7 @@ public class MoveTarget : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
+        //readingArduino.WriteToArduino();
         posCounter++;
         if (posCounter >= 6)
         {
