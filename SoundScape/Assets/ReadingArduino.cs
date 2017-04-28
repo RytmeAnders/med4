@@ -21,7 +21,7 @@ public class ReadingArduino : MonoBehaviour {
             try
             {
                 //stream.ReadByte();
-                print(stream.ReadLine());
+                print(stream.ReadByte());
             }
             catch (System.Exception){}
         }

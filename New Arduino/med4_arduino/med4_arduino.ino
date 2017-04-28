@@ -3,7 +3,7 @@
 #include "GY_85.h"
 #include <Wire.h>
 
-SerialCommand sCmd;
+//SerialCommand sCmd;
 GY_85 GY85; // Create object of GY_85
 
 void setup() {
@@ -14,15 +14,15 @@ void setup() {
     delay(10);
     GY85.init();
     delay(10);
-    while(!Serial);
-    sCmd.addCommand("PING", pingHandler);
-    sCmd.addCommand("ECHO", echoHandler);
+    //while(!Serial);
+    //sCmd.addCommand("PING", pingHandler);
+    //sCmd.addCommand("ECHO", echoHandler);
 }
 
 void loop() {
-  if (Serial.available() > 0){
-      sCmd.readSerial();
-  }
+  //if (Serial.available() > 0){
+    //  sCmd.readSerial();
+  //}
 
     int ax = GY85.accelerometer_x( GY85.readFromAccelerometer() );
     int ay = GY85.accelerometer_y( GY85.readFromAccelerometer() );
@@ -37,7 +37,12 @@ void loop() {
     float gz = GY85.gyro_z( GY85.readGyro() );
     float gt = GY85.temp  ( GY85.readGyro() );
     
-    Serial.print  ( "accelerometer" );
+    Serial.write(ax);
+    Serial.flush();
+    
+    delay(50);             // only read every 0,5 seconds, 10ms for 100Hz, 20ms for 50Hz
+    
+    /*Serial.print  ( "accelerometer" );
     Serial.print  ( " x:" );
     Serial.print  ( ax );
     Serial.print  ( " y:" );
@@ -62,14 +67,10 @@ void loop() {
     Serial.print  ( gz );
     Serial.print  ( " gyro temp:" );
     Serial.println( gt );
-
-    Serial.write(ax);
-    //Serial.flush();
-    
-    delay(50);             // only read every 0,5 seconds, 10ms for 100Hz, 20ms for 50Hz
+    */
 }
 
-void pingHandler() {
+/*void pingHandler() {
   Serial.println("PONG");
 }
 
@@ -80,5 +81,5 @@ void echoHandler () {
     Serial.println(arg);
   else
     Serial.println("nothing to echo");
-}
+}*/
 
