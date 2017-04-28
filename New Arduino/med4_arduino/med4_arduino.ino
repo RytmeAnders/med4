@@ -42,7 +42,7 @@ void loop() {
     
     delay(50);             // only read every 0,5 seconds, 10ms for 100Hz, 20ms for 50Hz
     
-    /*Serial.print  ( "accelerometer" );
+    Serial.print  ( "accelerometer" );
     Serial.print  ( " x:" );
     Serial.print  ( ax );
     Serial.print  ( " y:" );
@@ -67,7 +67,7 @@ void loop() {
     Serial.print  ( gz );
     Serial.print  ( " gyro temp:" );
     Serial.println( gt );
-    */
+    
 }
 
 /*void pingHandler() {
