@@ -3,8 +3,6 @@ using System.Collections;
 
 public class MoveTarget : MonoBehaviour {
 
-    ReadingArduino readingArduino;
-
     private int posCounter;
 
     private GameObject target;
@@ -12,6 +10,11 @@ public class MoveTarget : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        MoveTargetOnArray();
+    }
+
+    void MoveTargetOnArray() // Sets positions target is to be moved to
+    {
         posCounter = -1;
         target = GameObject.Find("Target");
         target.transform.position = new Vector3(0f, 0f, 0f);
@@ -23,14 +26,8 @@ public class MoveTarget : MonoBehaviour {
         targetPos[5] = new Vector3(60f, 60f, 60f);
     }
 
-    // Update is called once per frame
-    void Update () {
-        
-	}
-
-    void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter(Collision collision) // Moves target when hit
     {
-        //readingArduino.WriteToArduino();
         posCounter++;
         if (posCounter >= 6)
         {
