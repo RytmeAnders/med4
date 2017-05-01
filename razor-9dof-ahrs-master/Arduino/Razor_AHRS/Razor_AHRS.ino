@@ -535,6 +535,10 @@ void loop()
     float gz = GY85.gyro_z( GY85.readGyro() );
     float gt = GY85.temp  ( GY85.readGyro() );
 
+    Serial.print(ax); Serial.print ("_");
+    Serial.print(TO_DEG(yaw)); Serial.println();
+    delay(50);
+
   // Read incoming control messages
   if (Serial.available() >= 2)
   {
