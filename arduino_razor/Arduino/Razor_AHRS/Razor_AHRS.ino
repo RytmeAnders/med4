@@ -537,7 +537,7 @@ void loop()
 
     Serial.print(ax); Serial.print ("_");
     Serial.print(TO_DEG(yaw)); Serial.println();
-    delay(50);
+    delay(100);
 
   // Read incoming control messages
   if (Serial.available() >= 2)

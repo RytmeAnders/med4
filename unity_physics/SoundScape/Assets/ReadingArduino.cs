@@ -40,7 +40,7 @@ public class ReadingArduino : MonoBehaviour {
                 acceleration = float.Parse(accData[0]); //Parsing the split string into floats
                 orientation = float.Parse(accData[1]);
                 RotatePlayer(orientation); // Calls for rotations based off orientation received from arduino
-                LaunchBall(acceleration);
+                //LaunchBall(acceleration);
                 print(acceleration);
             }
             catch (TimeoutException){
