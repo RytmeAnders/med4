@@ -9,6 +9,8 @@ public class myScript : MonoBehaviour {
 
     public float cutoffOn = 800;
     public float cutoffOff = 100;
+    public int lowCut;
+    public int frequencyScalar;
 
     bool engineOn;
 
@@ -47,7 +49,7 @@ public class myScript : MonoBehaviour {
         rotOld = rotNew;                                    //Setting new rotation as the old one before reiterating
 
         print(rotDiff);
-        lowPassFilter.cutoffFrequency = 100+rotDiff*80;     //cutoffFrequency changes based on the angular change
+        lowPassFilter.cutoffFrequency = lowCut+rotDiff*frequencyScalar;     //cutoffFrequency changes based on the angular change
 
         if (Input.GetKey(KeyCode.W)) {                      //Rotate cube by speed = 10
             speed = 10;
