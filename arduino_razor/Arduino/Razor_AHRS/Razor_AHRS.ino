@@ -304,8 +304,10 @@ const float magn_ellipsoid_transform[3][3] = {{0.902, -0.00354, 0.000636}, {-0.0
   #error YOU HAVE TO SELECT THE HARDWARE YOU ARE USING! See "HARDWARE OPTIONS" in "USER SETUP AREA" at top of Razor_AHRS.ino!
 #endif
 
-#include "GY_85.h"
 #include <Wire.h>
+#include <Adafruit_Sensor.h>
+#include <Adafruit_ADXL345_U.h>
+
 
 // Sensor calibration scale and offset values
 #define ACCEL_X_OFFSET ((ACCEL_X_MIN + ACCEL_X_MAX) / 2.0f)
@@ -387,7 +389,7 @@ int num_magn_errors = 0;
 int num_gyro_errors = 0;
 
 //Importing GY_85 as object
-GY_85 GY85;
+Adafruit_ADXL345_Unified accell = Adafruit_ADXL345_Unified(12345);
 
 void read_sensors() {
   Read_Gyro(); // Read gyroscope
@@ -491,6 +493,9 @@ char readChar()
   return Serial.read();
 }
 
+int buttonThrow = 5; // TODO Set sensible value according to breadboard
+int stateThrow; // Value for throwing or not in unity
+
 void setup()
 {
   // Init serial output
@@ -498,6 +503,7 @@ void setup()
   
   // Init status LED
   pinMode (STATUS_LED_PIN, OUTPUT);
+  pinMode(buttonThrow, INPUT_PULLUP);
   digitalWrite(STATUS_LED_PIN, LOW);
 
   // Init sensors
@@ -506,9 +512,11 @@ void setup()
   Accel_Init();
   Magn_Init();
   Gyro_Init();
-  GY85.init();
   // Read sensors, init DCM algorithm
   delay(20);  // Give sensors enough time to collect data
+  accell.setRange(ADXL345_RANGE_16_G);
+  sensor_t sensor;
+  accell.getSensor(&sensor);
   reset_sensor_fusion();
 
   // Init output
@@ -522,22 +530,21 @@ void setup()
 // Main loop
 void loop()
 {
-  int ax = GY85.accelerometer_x( GY85.readFromAccelerometer() );
-    int ay = GY85.accelerometer_y( GY85.readFromAccelerometer() );
-    int az = GY85.accelerometer_z( GY85.readFromAccelerometer() );
-    
-    int cx = GY85.compass_x( GY85.readFromCompass() );
-    int cy = GY85.compass_y( GY85.readFromCompass() );
-    int cz = GY85.compass_z( GY85.readFromCompass() );
+  
 
-    float gx = GY85.gyro_x( GY85.readGyro() );
-    float gy = GY85.gyro_y( GY85.readGyro() );
-    float gz = GY85.gyro_z( GY85.readGyro() );
-    float gt = GY85.temp  ( GY85.readGyro() );
+  if (buttonThrow == LOW) {
+    sensors_event_t event; 
+    accell.getEvent(&event);
+    stateThrow = 1;
+  } else {
+    stateThrow = 0;
+  }
 
-    Serial.print(ax); Serial.print ("_");
-    Serial.print(TO_DEG(yaw)); Serial.println();
-    delay(100);
+  Serial.print(event.acceleration.x); Serial.print ("_");
+    Serial.print(TO_DEG(yaw)); Serial.print ("_"); Serial.print(stateThrow);
+    Serial.println();
+  
+  delay(100);
 
   // Read incoming control messages
   if (Serial.available() >= 2)

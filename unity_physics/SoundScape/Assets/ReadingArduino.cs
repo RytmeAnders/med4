@@ -11,12 +11,13 @@ public class ReadingArduino : MonoBehaviour {
     Rigidbody rb;
 
     string str, pattern = "_";
-    string[] accData = new string[2];
-    float acceleration, orientation;
+    string[] accData = new string[3];
+    float acceleration, orientation, state, state1;
     int u, angle; //Initial Velocity u (Science notation) and angle
 
 	// Use this for initialization
 	void Start () {
+        state1 = 0;
         //Opens stream
         stream.Open();
         stream.ReadTimeout = 100; // Sets timeout to 100 milliseconds, so it doesn't overload
@@ -39,8 +40,20 @@ public class ReadingArduino : MonoBehaviour {
                 accData = str.Split('_'); // Splits string
                 acceleration = float.Parse(accData[0]); //Parsing the split string into floats
                 orientation = float.Parse(accData[1]);
+                state = float.Parse(accData[2]);
                 RotatePlayer(orientation); // Calls for rotations based off orientation received from arduino
-                //LaunchBall(acceleration);
+                if (state == 0 && state1 == 0)
+                {
+                    LaunchBall(acceleration);
+                }
+                if (state == 0 && state1 == 1)
+                {
+                    LaunchBall(0f);
+                }
+                if (state == 1)
+                {
+                    state1 = 0;
+                }
                 print(acceleration);
             }
             catch (TimeoutException){
@@ -55,9 +68,9 @@ public class ReadingArduino : MonoBehaviour {
 
     void LaunchBall(float acceleration)
     {
-        print(acceleration);
         Vector3 direction = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right;
         rb.AddForce(direction * (u + (acceleration * Time.deltaTime)));
         rb.useGravity = true;
+        state1 = 1;
     }
 }
