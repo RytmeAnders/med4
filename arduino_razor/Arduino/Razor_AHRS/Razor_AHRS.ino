@@ -531,11 +531,12 @@ void setup()
 // Main loop
 void loop()
 {
-  
+  sensors_event_t event;
+  accell.getEvent(&event);
 
   if (buttonThrow == LOW) {
-    sensors_event_t event; 
-    accell.getEvent(&event);
+    //sensors_event_t event; 
+    //accell.getEvent(&event);
     stateThrow = 1;
   } else {
     stateThrow = 0;
