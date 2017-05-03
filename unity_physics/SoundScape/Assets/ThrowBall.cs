@@ -21,4 +21,5 @@ public class ThrowBall : MonoBehaviour {
         rb.useGravity = false;
         print(initialPos);
     }
+    //HER ER MINE AWESOME ÆNDRINGER
 }

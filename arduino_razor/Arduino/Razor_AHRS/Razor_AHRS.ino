@@ -530,16 +530,16 @@ void setup()
 // Main loop
 void loop()
 {
-  
+  sensors_event_t event;
+  accell.getEvent(&event);
 
   if (buttonThrow == LOW) {
-    sensors_event_t event; 
-    accell.getEvent(&event);
+    //sensors_event_t event; 
+    //accell.getEvent(&event);
     stateThrow = 1;
   } else {
     stateThrow = 0;
   }
-
   Serial.print(event.acceleration.x); Serial.print ("_");
     Serial.print(TO_DEG(yaw)); Serial.print ("_"); Serial.print(stateThrow);
     Serial.println();
