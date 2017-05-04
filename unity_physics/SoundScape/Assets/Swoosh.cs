@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Swoosh : MonoBehaviour {
+    //TODO Removed orientationNew, using just ard.orientation, should work
+
     [Range(-1f, 1f)]
     public float offset;                                    //offset slider with range -1:1 (range defined above)
 
     public int lowCut, scalar;
-    float orientationOld, orientationNew, orientationDiff;  //Orientation values to measure a difference over time
+    float orientationOld, orientationDiff;                  //Orientation values to measure a difference over time
 
     System.Random rand = new System.Random();               //A class with a method for generating random values
     AudioLowPassFilter lowPassFilter;
@@ -29,12 +31,15 @@ public class Swoosh : MonoBehaviour {
 
     void Update() {
         //Reading the difference in orientation over time
-        orientationNew = ard.orientation;
-        orientationDiff = Mathf.Abs(orientationNew - orientationOld);
-        orientationOld = orientationNew;
+        orientationDiff = Mathf.Abs(ard.orientation - orientationOld);
+        orientationOld = ard.orientation;
 
-        print("Me: " + orientationDiff + " Andreas: " + ard.orientation);
+        /*TODO Maybe this prevents clipping?
+        if(orientationDiff > ard.orientation) {
+            orientationDiff = Mathf.Abs(ard.orientation);
+        }*/
 
-        lowPassFilter.cutoffFrequency = lowCut + orientationDiff * scalar;
+        print("Difference: " + orientationDiff + " Raw Value: " + ard.orientation);
+        lowPassFilter.cutoffFrequency = lowCut + orientationDiff * scalar;          //LPF freq changing based on change in orientation
     }
 }
