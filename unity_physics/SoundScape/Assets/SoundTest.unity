@@ -133,7 +133,7 @@ AudioListener:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 5259085}
-  m_Enabled: 0
+  m_Enabled: 1
 --- !u!124 &5259087
 Behaviour:
   m_ObjectHideFlags: 0
@@ -712,12 +712,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1470738076}
   - component: {fileID: 1470738075}
+  - component: {fileID: 1470738077}
   - component: {fileID: 1470738074}
   - component: {fileID: 1470738073}
   - component: {fileID: 1470738079}
-  - component: {fileID: 1470738077}
-  - component: {fileID: 1470738072}
   - component: {fileID: 1470738080}
+  - component: {fileID: 1470738072}
   - component: {fileID: 1470738078}
   m_Layer: 0
   m_Name: Player
@@ -732,7 +732,7 @@ AudioListener:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1470738071}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!23 &1470738073
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -808,6 +808,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45680be251f4fda41a7eaff2d893489f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  acceleration: 0
+  orientation: 0
+  state: 0
+  state1: 0
 --- !u!169 &1470738078
 AudioLowPassFilter:
   m_ObjectHideFlags: 0
@@ -841,8 +845,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: 0
-  lowCut: 100
-  frequencyScalar: 80
+  lowCut: 0
+  scalar: 50
 --- !u!82 &1470738080
 AudioSource:
   m_ObjectHideFlags: 0

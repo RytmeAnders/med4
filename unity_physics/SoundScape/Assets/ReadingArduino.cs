@@ -12,7 +12,7 @@ public class ReadingArduino : MonoBehaviour {
 
     string str, pattern = "_";
     string[] accData = new string[3];
-    float acceleration, orientation, state, state1;
+    public float acceleration, orientation, state, state1;
     int u, angle; //Initial Velocity u (Science notation) and angle
 
 	// Use this for initialization
