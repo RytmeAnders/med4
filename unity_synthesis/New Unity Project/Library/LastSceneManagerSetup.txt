@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/HOME.unity
+- path: D:/github/med4/unity_physics/SoundScape/Assets/SoundTest.unity
   isLoaded: 1
   isActive: 1
