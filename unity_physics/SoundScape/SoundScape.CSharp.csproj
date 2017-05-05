@@ -82,6 +82,7 @@
     <Compile Include="Assets\ReadingArduino.cs" />
     <Compile Include="Assets\Swoosh.cs" />
     <Compile Include="Assets\ThrowBall.cs" />
+    <Compile Include="Assets\audiopan.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
