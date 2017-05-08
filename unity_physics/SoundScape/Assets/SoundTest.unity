@@ -848,6 +848,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cd209dcb1057264491589266b58534d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dynamicSound: 1
   offset: 0
   lowCut: 0
   scalar: 50
