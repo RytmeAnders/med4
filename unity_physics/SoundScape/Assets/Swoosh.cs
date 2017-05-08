@@ -6,17 +6,20 @@ public class Swoosh : MonoBehaviour {
     //TODO Removed orientationNew, using just ard.orientation, should work
 
     public bool dynamicSound;
-    int speedRot, speedAcc;
 
-    [Range(-1f, 1f)]
-    public float offset;                                    //offset slider with range -1:1 (range defined above)
-
+    //---- Parameters inside Unity
+    [Range(0f, 10f)] public float staticThreshold;          //Threshold determining when the static sample will play
+    [Range(0,2000)] public int staticFreq;                  //The frequency cut off for the static sample
+    [Range(-1f, 1f)] public float offset;                   //offset slider with range -1:1 (range defined above)
     public int lowCut, scalar;
-    float orientationOld, orientationDiff;                  //Orientation values to measure a difference over time
+    //----------------------------
+
+    float orientationOld, orientationDiff, dynamicDiff;     //Orientation values to measure a difference over time
+    float accelerationOld, accelerationDiff;                //Acceleration values from GY-85
 
     System.Random rand = new System.Random();               //A class with a method for generating random values
     AudioLowPassFilter lowPassFilter;
-    ReadingArduino ard;
+    ReadingArduino ard;                                     //Object of the Arduino board from the ReadingArduino script
 
     void OnAudioFilterRead(float[] data, int channels) {                //White noise generation
         for (int i = 0; i < data.Length; i++) {
@@ -29,6 +32,7 @@ public class Swoosh : MonoBehaviour {
         lowPassFilter = GetComponent<AudioLowPassFilter>(); //Object of the LowPassFilter component
 
         orientationOld = ard.orientation;                   //Initial orientation value
+        accelerationOld = ard.acceleration;                 //Initial acceleration value
     }
 
     void Update() {
@@ -36,22 +40,28 @@ public class Swoosh : MonoBehaviour {
         orientationDiff = Mathf.Abs(ard.orientation - orientationOld);
         orientationOld = ard.orientation;
 
+        //Reading the difference in acceleration over time
+        accelerationDiff = Mathf.Abs(ard.acceleration - accelerationOld);
+        accelerationOld = ard.acceleration;
+
         if (dynamicSound) {
             /*TODO Maybe this prevents clipping?
             if(orientationDiff > ard.orientation) {
                 orientationDiff = Mathf.Abs(ard.orientation);
             }*/
+            dynamicDiff = Mathf.Max(orientationDiff, accelerationDiff);                 //Find the biggest change
 
-            print("Difference: " + orientationDiff + " Raw Value: " + ard.orientation);
-            lowPassFilter.cutoffFrequency = lowCut + orientationDiff * scalar;          //LPF freq changing based on change in orientation
+            print("Diff Ori: " + orientationDiff + " Raw Ori: " + ard.orientation
+                + " | Diff Acc: " + accelerationDiff + " Raw Acc: " + ard.acceleration);
+            lowPassFilter.cutoffFrequency = lowCut + dynamicDiff * scalar;              //LPF freq changing based on change
         }
         else {
-            if (orientationDiff > 2f) {                 //If difference is > 2, play a static sound sample
+            if (orientationDiff > staticThreshold) {        //If difference is > threshold, play a static sound sample
                 print("Sound Activated!");
-                lowPassFilter.cutoffFrequency = 900;    //Static because cutOff is always 900
+                lowPassFilter.cutoffFrequency = staticFreq; //Static sample plays at a set freq cut off
             }
             print("Sound Inactive!");
-            lowPassFilter.cutoffFrequency = 0;          //If no difference over time, filter out all freqs (play no sound)
+            lowPassFilter.cutoffFrequency = 0;              //If no difference over time, filter out all freqs (play no sound)
         }
     }
 }

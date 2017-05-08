@@ -849,6 +849,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dynamicSound: 1
+  staticThreshold: 2
+  staticFreq: 900
   offset: 0
   lowCut: 0
   scalar: 50
