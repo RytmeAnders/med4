@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Swoosh : MonoBehaviour {
     //TODO Removed orientationNew, using just ard.orientation, should work
+    //TODO Nice To Have: Stereo Pan manipulation
 
     public bool dynamicSound;
 
@@ -55,7 +56,7 @@ public class Swoosh : MonoBehaviour {
                 + " | Diff Acc: " + accelerationDiff + " Raw Acc: " + ard.acceleration);
             lowPassFilter.cutoffFrequency = lowCut + dynamicDiff * scalar;              //LPF freq changing based on change
         }
-        else {
+        else { //Static sound
             if (orientationDiff > staticThreshold) {        //If difference is > threshold, play a static sound sample
                 print("Sound Activated!");
                 lowPassFilter.cutoffFrequency = staticFreq; //Static sample plays at a set freq cut off

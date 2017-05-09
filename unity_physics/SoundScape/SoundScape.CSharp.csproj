@@ -78,7 +78,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\BallChirp.cs" />
     <Compile Include="Assets\MoveTarget.cs" />
+    <Compile Include="Assets\Ping.cs" />
     <Compile Include="Assets\ReadingArduino.cs" />
     <Compile Include="Assets\Swoosh.cs" />
     <Compile Include="Assets\ThrowBall.cs" />

@@ -427,6 +427,7 @@ GameObject:
   - component: {fileID: 624824567}
   - component: {fileID: 624824568}
   - component: {fileID: 624824569}
+  - component: {fileID: 624824570}
   m_Layer: 0
   m_Name: Audio Source
   m_TagString: Untagged
@@ -456,7 +457,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: c7f2f03ff2a3ed342a7411b92ce8f15c, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 100fe0be7cf5813428317e9f72bb0179, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -536,6 +537,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a8bae781501e9594db6fd07c0875c96c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &624824570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 624824566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d251ac206f196984cb7f3a72099c7068, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1077312210
@@ -730,6 +742,7 @@ GameObject:
   - component: {fileID: 1470738079}
   - component: {fileID: 1470738080}
   - component: {fileID: 1470738078}
+  - component: {fileID: 1470738072}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -737,6 +750,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1470738072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1470738071}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5309c2ae563dcf479fc3fff12577836, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frequency: 440
+  gain: 0.05
 --- !u!23 &1470738073
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -843,12 +869,12 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1470738071}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6cd209dcb1057264491589266b58534d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dynamicSound: 1
+  dynamicSound: 0
   staticThreshold: 2
   staticFreq: 900
   offset: 0
