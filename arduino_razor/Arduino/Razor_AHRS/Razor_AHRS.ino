@@ -1,3 +1,4 @@
+//hej hej
 /***************************************************************************************************************
 * Razor AHRS Firmware v1.4.2
 * 9 Degree of Measurement Attitude and Heading Reference System
@@ -534,11 +535,22 @@ void setup()
 // Main loop
 void loop()
 {
+<<<<<<< HEAD
   sensors_event_t event; 
   accell.getEvent(&event);
   push = digitalRead(buttonThrow);
 
   if (push == LOW) {
+=======
+  sensors_event_t event;
+  accell.getEvent(&event);
+
+  if (buttonThrow == LOW) {
+    //sensors_event_t event; 
+    //accell.getEvent(&event);
+    stateThrow = 1;
+  } else {
+>>>>>>> c5c29f5081772e835c09c5c7ad9024e93b0a1bb9
     stateThrow = 0;
   } else {
     stateThrow = 1;
