@@ -204,7 +204,7 @@ boolean output_errors = false;  // true or false
 // It is not necessary to set this! It just makes life easier when writing code for
 // the receiving side. The Processing test sketch also works without setting this.
 // NOTE: When using this, OUTPUT__STARTUP_STREAM_ON has no effect!
-#define OUTPUT__HAS_RN_BLUETOOTH true  // true or false
+#define OUTPUT__HAS_RN_BLUETOOTH false  // true or false
 
 
 // SENSOR CALIBRATION
@@ -494,7 +494,6 @@ char readChar()
   return Serial.read();
 }
 
-SoftwareSerial BT(0,1);
 
 int buttonThrow = 11; // TODO Set sensible value according to breadboard
 int push = 0; // Value for reading button
@@ -503,7 +502,7 @@ int stateThrow; // Value for throwing or not in unity
 void setup()
 {
   // Init serial output
-  Serial1.begin(9600);
+  Serial.begin(9600);
   BT.begin(38400);
   
   // Init status LED

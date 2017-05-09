@@ -25,7 +25,7 @@ public class ReadingArduino : MonoBehaviour {
         {
             Debug.Log(ports[i]);
         }
-        stream = new SerialPort("COM7", 9600, Parity.None, 8, StopBits.One);
+        stream = new SerialPort("COM9", 9600, Parity.None, 8, StopBits.One);
         accHigh = 0;
         state1 = 0;
         //Opens stream

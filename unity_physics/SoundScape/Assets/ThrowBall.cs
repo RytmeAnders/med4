@@ -22,8 +22,8 @@ public class ThrowBall : MonoBehaviour {
 
     void Update()
     {
-        orientation = arduino.orientation;
-        print(orientation);
+        //orientation = arduino.orientation;
+        //print(orientation);
     }
 
     public void RotateBall(float yOrientation)
