@@ -308,6 +308,7 @@ const float magn_ellipsoid_transform[3][3] = {{0.902, -0.00354, 0.000636}, {-0.0
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_ADXL345_U.h>
+#include <SoftwareSerial.h>
 
 
 // Sensor calibration scale and offset values
@@ -494,13 +495,16 @@ char readChar()
   return Serial.read();
 }
 
-int buttonThrow = 5; // TODO Set sensible value according to breadboard
+
+int buttonThrow = 11; // TODO Set sensible value according to breadboard
+int push = 0; // Value for reading button
 int stateThrow; // Value for throwing or not in unity
 
 void setup()
 {
   // Init serial output
   Serial.begin(9600);
+  BT.begin(38400);
   
   // Init status LED
   pinMode (STATUS_LED_PIN, OUTPUT);
@@ -531,6 +535,13 @@ void setup()
 // Main loop
 void loop()
 {
+<<<<<<< HEAD
+  sensors_event_t event; 
+  accell.getEvent(&event);
+  push = digitalRead(buttonThrow);
+
+  if (push == LOW) {
+=======
   sensors_event_t event;
   accell.getEvent(&event);
 
@@ -539,7 +550,10 @@ void loop()
     //accell.getEvent(&event);
     stateThrow = 1;
   } else {
+>>>>>>> c5c29f5081772e835c09c5c7ad9024e93b0a1bb9
     stateThrow = 0;
+  } else {
+    stateThrow = 1;
   }
 
   Serial.print(event.acceleration.x); Serial.print ("_");
