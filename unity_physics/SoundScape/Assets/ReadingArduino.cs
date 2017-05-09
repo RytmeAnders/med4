@@ -12,12 +12,8 @@ public class ReadingArduino : MonoBehaviour {
 
     string str, pattern = "_";
     string[] accData = new string[3];
-<<<<<<< HEAD
-    float acceleration, accHigh;
+    public float acceleration, accHigh;
     public float orientation, state, state1;
-=======
-    public float acceleration, orientation, state, state1;
->>>>>>> c5c29f5081772e835c09c5c7ad9024e93b0a1bb9
     int u, angle; //Initial Velocity u (Science notation) and angle
 
     char[] strm = new char[20];
@@ -29,7 +25,7 @@ public class ReadingArduino : MonoBehaviour {
         {
             Debug.Log(ports[i]);
         }
-        stream = new SerialPort("COM9", 9600, Parity.None, 8, StopBits.One);
+        stream = new SerialPort("COM9", 9600);
         accHigh = 0;
         state1 = 0;
         //Opens stream
