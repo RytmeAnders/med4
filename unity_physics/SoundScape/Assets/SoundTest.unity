@@ -197,6 +197,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 --- !u!1 &18943253
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,6 +418,8 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+=======
+>>>>>>> master
 --- !u!1 &624824566
 GameObject:
   m_ObjectHideFlags: 0
@@ -838,6 +841,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45680be251f4fda41a7eaff2d893489f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
+  orientation: 0
+  state: 0
+  state1: 0
+=======
   acceleration: 0
   orientation: 0
   state: 0
@@ -960,3 +968,4 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+>>>>>>> c5c29f5081772e835c09c5c7ad9024e93b0a1bb9
